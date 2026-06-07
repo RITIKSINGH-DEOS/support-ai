@@ -1,36 +1,201 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Support AI 🤖
 
-## Getting Started
+An AI-powered customer support chatbot platform that allows businesses to create, customize, and embed intelligent support assistants on their websites.
 
-First, run the development server:
+## ✨ Features
+
+- User Authentication with ScaleKit
+- Business-specific AI Chatbot
+- Custom Knowledge Base
+- Gemini AI Integration
+- Embeddable Chat Widget
+- MongoDB Database
+- Dashboard for Chatbot Configuration
+- Real-time Customer Support Responses
+- Website Integration via Script Tag
+- Secure API Routes
+
+---
+
+## 🛠 Tech Stack
+
+### Frontend
+- Next.js
+- React
+- TypeScript
+- Tailwind CSS
+- Framer Motion
+
+### Backend
+- Next.js API Routes
+- MongoDB
+- Mongoose
+
+### Authentication
+- ScaleKit
+
+### AI
+- Google Gemini API
+
+---
+
+## 📂 Project Structure
+
+```bash
+src/
+│
+├── app/
+│   ├── api/
+│   │   ├── auth/
+│   │   ├── chat/
+│   │   └── settings/
+│   │
+│   ├── dashboard/
+│   └── page.tsx
+│
+├── components/
+│
+├── lib/
+│   ├── db.ts
+│   └── scalekit.ts
+│
+├── model/
+│
+└── middleware/
+```
+
+---
+
+## 🚀 Installation
+
+### 1. Clone Repository
+
+```bash
+git clone https://github.com/yourusername/support-ai.git
+```
+
+### 2. Install Dependencies
+
+```bash
+npm install
+```
+
+### 3. Create Environment Variables
+
+Create a `.env.local` file:
+
+```env
+# MongoDB
+MONGODB_URL=your_mongodb_connection_string
+
+# Gemini
+GEMINI_API_KEY=your_gemini_api_key
+
+# ScaleKit
+SCALEKIT_ENVIRONMENT_URL=your_scalekit_environment_url
+SCALEKIT_CLIENT_ID=your_client_id
+SCALEKIT_CLIENT_SECRET=your_client_secret
+
+# App
+NEXT_PUBLIC_APP_URL=http://localhost:3000
+```
+
+### 4. Run Development Server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Project will be available at:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 🤖 How It Works
 
-To learn more about Next.js, take a look at the following resources:
+1. User logs in using ScaleKit.
+2. Business owner configures:
+   - Business Name
+   - Support Email
+   - Knowledge Base
+3. Settings are stored in MongoDB.
+4. Customer messages are sent to Gemini AI.
+5. Gemini answers using only the provided business knowledge.
+6. Chatbot can be embedded into any website.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 💬 Example Knowledge Base
 
-## Deploy on Vercel
+```text
+Support Email: support@company.com
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Refund Policy:
+7-day return policy available.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Delivery:
+3-5 business days.
+
+Payment:
+Cash on Delivery available.
+```
+
+---
+
+## 🔌 Chat Widget Integration
+
+Embed the chatbot on any website:
+
+```html
+<script
+  src="https://your-domain.com/widget.js"
+  data-owner-id="YOUR_OWNER_ID">
+</script>
+```
+
+---
+
+## 📸 Screenshots
+
+- Landing Page
+- Dashboard
+- Chat Widget
+- Embedded Chat Experience
+
+---
+
+## 🔒 Security
+
+- Secure Authentication using ScaleKit
+- Environment Variables for Secrets
+- Server-side API Validation
+- MongoDB Connection Protection
+
+---
+
+## Future Improvements
+
+- Chat History Storage
+- Analytics Dashboard
+- Multi-language Support
+- Lead Collection
+- Theme Customization
+- Human Handoff Support
+- Multiple AI Models
+
+---
+
+## Author
+
+**Ritik Singh**
+
+Content Creator • Web Developer
+
+---
+
+## License
+
+This project is licensed under the MIT License.
