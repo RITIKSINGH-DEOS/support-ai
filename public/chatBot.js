@@ -1,13 +1,25 @@
 (function () {
-    const api_Url = "https://support-ai-wheat.vercel.app/api/chat"
-
     const scriptTag = document.currentScript;
+    if (!scriptTag) {
+        return;
+    }
     const ownerId = scriptTag.getAttribute('data-owner-id');
 
     if (!ownerId) {
-        console.log("owner id not found")
+        console.error("Support AI: data-owner-id not found on script tag.");
         return;
     }
+
+    let origin = "https://support-ai-wheat.vercel.app";
+    try {
+        if (scriptTag.src) {
+            origin = new URL(scriptTag.src).origin;
+        }
+    } catch {
+        // fallback
+    }
+
+    const api_Url = scriptTag.getAttribute('data-api-url') || `${origin}/api/chat`;
 
     const button = document.createElement('div');
     button.innerHTML = "🗨️";
@@ -164,15 +176,20 @@
                     message: text
                 })
             });
-            const data = await response.json();
+            const data = await response.json().catch(() => null);
             messageArea.removeChild(typing);
-            // addMessage(data || "Something went wrong", "ai");
-            addMessage(data, "ai");
+            let reply = "Something went wrong. Please try again.";
+            if (typeof data === "string") {
+                reply = data;
+            } else if (data && typeof data === "object") {
+                reply = data.message || data.reply || JSON.stringify(data);
+            }
+            addMessage(reply, "ai");
         }
         catch (error) {
             console.log(error);
             messageArea.removeChild(typing);
-            addMessage("Something went wrong", "ai");
+            addMessage("Something went wrong. Please try again.", "ai");
         }
     }
 

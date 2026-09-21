@@ -1,11 +1,10 @@
 
 import { cookies } from "next/headers";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
-export async function GET(request: NextRequest) {
+export async function GET() {
     const cookieStore = await cookies()
     cookieStore.delete("access_token")
-    return NextResponse.json(`${process.env.NEXT_PUBLIC_APP_URL}`)
-
+    return NextResponse.json({ success: true, url: process.env.NEXT_PUBLIC_APP_URL || "/" })
 }
 

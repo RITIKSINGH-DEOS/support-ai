@@ -48,7 +48,7 @@ function HomeClient({ email }: { email?: string }) {
 
     const handleLogout = async () => {
         try {
-            const result = await axios.get('/api/auth/logout')
+            await axios.get('/api/auth/logout')
             window.location.href = "/"
         } catch (error) {
             console.log(error);

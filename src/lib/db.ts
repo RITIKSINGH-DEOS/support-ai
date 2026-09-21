@@ -22,6 +22,7 @@ const connectDb = async () => {
     try {
         cache.conn = await cache.promise
     } catch (error) {
+        cache.promise = null
         console.log(error)
     }
 

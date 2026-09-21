@@ -63,6 +63,17 @@ export async function POST(req: NextRequest) {
         -----------------------
         `;
 
+        if (!process.env.GEMINI_API_KEY) {
+            const response = NextResponse.json(
+                { message: "GEMINI_API_KEY is not configured." },
+                { status: 500 }
+            );
+            response.headers.set("Access-Control-Allow-Origin", "*");
+            response.headers.set("Access-Control-Allow-Methods", "POST, OPTIONS");
+            response.headers.set("Access-Control-Allow-Headers", "Content-Type");
+            return response;
+        }
+
         const ai = new GoogleGenAI({
             apiKey: process.env.GEMINI_API_KEY
         });
@@ -72,31 +83,32 @@ export async function POST(req: NextRequest) {
             contents: prompt,
         });
 
-        const response = NextResponse.json(res.text)
+        const replyText = res.text || "I'm sorry, but I couldn't generate a response.";
+        const response = NextResponse.json(replyText);
         response.headers.set("Access-Control-Allow-Origin", "*");
         response.headers.set("Access-Control-Allow-Methods", "POST, OPTIONS");
         response.headers.set("Access-Control-Allow-Headers", "Content-Type");
-        return response
+        return response;
 
     } catch (error) {
         const response = NextResponse.json(
             { message: `Chat error ${error}` },
             { status: 500 }
-        )
+        );
         response.headers.set("Access-Control-Allow-Origin", "*");
         response.headers.set("Access-Control-Allow-Methods", "POST, OPTIONS");
         response.headers.set("Access-Control-Allow-Headers", "Content-Type");
-        return response
+        return response;
     }
 }
-``
+
 export const OPTIONS = async () => {
     return new NextResponse(null, {
-        status: 201,
+        status: 200,
         headers: {
             "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Methods": "POST, OPTIONS",
             "Access-Control-Allow-Headers": "Content-Type",
         },
     });
-}
+};

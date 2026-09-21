@@ -17,23 +17,26 @@ function DashboardClient({ ownerId }: { ownerId: string }) {
         try {
             const result = await axios.post('/api/settings', { ownerId, businessName, supportEmail, knowledge })
             console.log(result.data);
-            setLoading(false)
             setSaved(true)
             setTimeout(() => {
                 setSaved(false)
             }, 3000)
         } catch (error) {
             console.log(error);
+        } finally {
+            setLoading(false)
         }
     }
     useEffect(() => {
-        if (!ownerId) {
+        if (ownerId) {
             const handleGetDetails = async () => {
                 try {
                     const result = await axios.post('/api/settings/get', { ownerId })
-                    setBusinessName(result.data.businessName)
-                    setSupportEmail(result.data.supportEmail)
-                    setKnowledge(result.data.knowledge)
+                    if (result.data) {
+                        setBusinessName(result.data.businessName || "")
+                        setSupportEmail(result.data.supportEmail || "")
+                        setKnowledge(result.data.knowledge || "")
+                    }
                 } catch (error) {
                     console.log(error);
                 }
